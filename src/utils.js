@@ -1,6 +1,5 @@
 const domain = "http://localhost:8080";
 
-
 export const login = (credential) => {
     const loginUrl = `${domain}/auth/login`;
     return fetch(loginUrl, {
@@ -40,6 +39,7 @@ export const getReservations = () => {
     const authToken = localStorage.getItem("authToken");
     const listReservationsUrl = `${domain}/bookings`;
 
+
     return fetch(listReservationsUrl, {
         headers: {
             Authorization: `Bearer ${authToken}`,
@@ -48,6 +48,7 @@ export const getReservations = () => {
         if (response.status >= 300) {
             throw Error("Fail to get reservation list");
         }
+
 
         return response.json();
     });

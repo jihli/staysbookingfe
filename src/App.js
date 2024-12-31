@@ -3,17 +3,15 @@ import { UserOutlined } from "@ant-design/icons";
 import React from "react";
 import LoginPage from "./components/LoginPage";
 import HostHomePage from "./components/HostHomePage";
-
+import GuestHomePage from "./components/GuestHomePage"; // 确保导入 GuestHomePage
 
 const { Header, Content } = Layout;
-
 
 class App extends React.Component {
   state = {
     authed: false,
     asHost: false,
   };
-
 
   componentDidMount() {
     const authToken = localStorage.getItem("authToken");
@@ -24,7 +22,6 @@ class App extends React.Component {
     });
   }
 
-
   handleLoginSuccess = (token, asHost) => {
     localStorage.setItem("authToken", token);
     localStorage.setItem("asHost", asHost);
@@ -34,7 +31,6 @@ class App extends React.Component {
     });
   };
 
-
   handleLogOut = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("asHost");
@@ -43,21 +39,18 @@ class App extends React.Component {
     });
   };
 
-
   renderContent = () => {
     if (!this.state.authed) {
       return <LoginPage handleLoginSuccess={this.handleLoginSuccess} />;
     }
 
-
     if (this.state.asHost) {
       return <HostHomePage />;
     }
 
-
-    return <div>guest home page</div>;
+    // 正确渲染 GuestHomePage
+    return <GuestHomePage />;
   };
-
 
   userMenu = (
       <Menu>
@@ -66,7 +59,6 @@ class App extends React.Component {
         </Menu.Item>
       </Menu>
   );
-
 
   render() {
     return (
@@ -92,6 +84,5 @@ class App extends React.Component {
     );
   }
 }
-
 
 export default App;
